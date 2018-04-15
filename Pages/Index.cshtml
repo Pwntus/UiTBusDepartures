@@ -1,0 +1,29 @@
+@page "/"
+@inject HttpClient Http
+
+<RenderDepartures RawData="RawData" />
+
+@functions {
+    DepartureData[] RawData;
+
+    protected override async Task OnInitAsync() {
+        // TODO: fetch/scrape data from API
+        RawData = await Http.GetJsonAsync<DepartureData[]>("/sample-data/weather.json");
+    }
+
+    // TODO: use build-in methods to construct a polling
+    //       mechanism so that 'departureData' is updated
+    //       regularly. Also, figure out how often to poll.
+
+    // TODO: define correct properties.
+    //       Also, the class definition needs to be moved
+    //       somewhere so that multiple components may use
+    //       it (e.g. RenderDepartures). I don't know how
+    //       this would be done :(
+    class DepartureData {
+        public DateTime Date { get; set; }
+        public int TemperatureC { get; set; }
+        public int TemperatureF { get; set; }
+        public string Summary { get; set; }
+    }
+}

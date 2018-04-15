@@ -1,0 +1,30 @@
+@if (RawData == null) {
+    // TODO: use an animated loading icon
+    <p><em>Loading...</em></p>
+}
+
+@if (RawData != null) {
+    <table class='table'>
+        <tbody>
+            @foreach (var departure in RawData) {
+                <tr>
+                    <td>@departure.Date.ToShortDateString()</td>
+                    <td>@departure.TemperatureC</td>
+                    <td>@departure.TemperatureF</td>
+                    <td>@departure.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@functions {
+    // Raw data-window provided by parent component
+    public string RawData { get; set; }
+
+    // TODO: create a "reactive" date property that
+    //       defines "now". This component will re-render
+    //       whenever its time to move departure rows
+    //       or change time-until-departure for individual
+    //       rows.
+}
